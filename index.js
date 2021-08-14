@@ -1,21 +1,12 @@
 const express = require('express');
-
-const users = require('./user');
-
-
+const route = require('./route/route');
+const bodyParser = require('body-parser');
 const app = express();
 
-app.get('/' , (req , res)=>{
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-   res.send('<h1> hello from simple server :) </h1>');
-
-})
-
-app.get('/user' , (req , res)=>{
-
-   res.json(users)
-
-})
+app.use(route)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, console.log('server runing'));
