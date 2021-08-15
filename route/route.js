@@ -30,11 +30,11 @@ router.get('/' , (req , res)=>{
 router.post('/user' , (req , res)=>{
 const newUser = {
    id: uuid.v4(),
-   name: req.body.name,
-   age: req.body.age,
-   status: 'active',
-   numberphon: req.body.numberphon,
-   address: req.body.address,
+   name: req.body.name ? req.body.name : "Not entered",
+   age: req.body.age ? req.body.age : "Not entered",
+   status: 'active', 
+   numberphon: req.body.numberphon ? req.body.numberphon : "Not entered",
+   address: req.body.address ? req.body.address : "Not entered",
    
 }
 
