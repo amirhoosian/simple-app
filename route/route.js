@@ -18,9 +18,9 @@ router.get('/' , (req , res)=>{
 
  //get single user
  router.get('/user/:id', (req , res)=>{
-   const found = users.some(user => user.id ===  parseInt(req.params.id))
+   const found = users.some(user => user.id ==  req.params.id)
    if(found){
-      res.json(users.filter(user => user.id === parseInt(req.params.id)));
+      res.json(users.filter(user => user.id == req.params.id));
    }else{
       res.status(400).json({msg: `user not found width id ${req.params.id}`})
    }
@@ -35,6 +35,7 @@ const newUser = {
    status: 'active', 
    numberphon: req.body.numberphon ? req.body.numberphon : "Not entered",
    address: req.body.address ? req.body.address : "Not entered",
+   food: req.body.food ? req.body.food : "Not entered"
    
 }
 
@@ -44,15 +45,16 @@ res.json(users)
 
 //update user
 router.put('/user/:id', (req, res)=>{
-   const found = users.some(user => user.id ===  parseInt(req.params.id))
+   const found = users.some(user => user.id ==  req.params.id)
    if(found){
       const udateUser = req.body
       users.forEach(user => {
-         if(user.id === parseInt(req.params.id)){
+         if(user.id == req.params.id){
             user.name = udateUser.name ? udateUser.name : user.name
-            user.age = udateUser.age ? udateUser.age : user
+            user.age = udateUser.age ? udateUser.age : user.age
             user.numberphon = udateUser.numberphon ? udateUser.numberphon : user.numberphon
             user.address = udateUser.address ? udateUser.address : user.address
+            user.food = udateUser.food ? udateUser.food : user.food
 
             res.json({msg: "user update", users})
          }
