@@ -4,16 +4,12 @@ const router = express.Router();
 
 const users = require('../user');
 
-router.get('/' , (req , res)=>{
 
-    res.send('<h1> hello from simple api :) </h1>');
- 
- })
  
  router.get('/user' , (req , res)=>{
  
     res.json(users)
- 
+   // res.redirect('/')
  })
 
  //get single user
@@ -31,6 +27,7 @@ router.post('/user' , (req , res)=>{
 const newUser = {
    id: uuid.v4(),
    name: req.body.name ? req.body.name : "Not entered",
+   email: req.body.email ? req.body.email : "Not entered",
    age: req.body.age ? req.body.age : "Not entered",
    status: 'active', 
    numberphon: req.body.numberphon ? req.body.numberphon : "Not entered",
@@ -40,7 +37,8 @@ const newUser = {
 }
 
 users.push(newUser)
-res.json(users)
+// res.json(users)
+res.redirect('/')
 })
 
 //update user
